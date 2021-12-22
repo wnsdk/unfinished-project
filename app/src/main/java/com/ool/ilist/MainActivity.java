@@ -32,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView iv_profile;
 
     // 2. 리스트 관련 필드
-    SingerAdapter adapter;
-    EditText editTextDate;
-    EditText editTextToDo;
+    public static SingerAdapter adapter;
+
 
     // 3. 프래그먼트 관련 필드
     MainFragment mainFragment;
@@ -59,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         // 2. 스케쥴 관리
-        editTextDate = (EditText) findViewById(R.id.editTextDate);
-        editTextToDo = (EditText) findViewById(R.id.editTextToDo);
-
         ListView listView = (ListView) findViewById(R.id.listView);
 
         // 어댑터 안에 데이터 담기
@@ -84,18 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 버튼 눌렀을 때 리스트뷰에 포함되도록 처리
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String date = editTextDate.getText().toString();
-                String toDo = editTextToDo.getText().toString();
 
-                adapter.addItem(new SingerItem(date, toDo));
-                adapter.notifyDataSetChanged();
-            }
-        });
 
         // 이미 들어가 있는 데이터들에 한해서 정렬해 줌(새로 추가되는 데이터에 대한 정렬 기능 필요!!)
         Comparator<SingerItem> dataAsc = new Comparator<SingerItem>() {
@@ -156,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 3. 프래그먼트
+    // index값으로 0을 전달받으면 menuFragment 활성화
     public void onFragmentChangedIntoMenu(int index){
         if(index == 0)
             getSupportFragmentManager().beginTransaction().replace(R.id.container, menuFragment).commit();
@@ -163,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
     }
 
+    // index값으로 0을 전달받으면 addFragment 활성화
     public void onFragmentChangedIntoAdd(int index){
         if(index == 0)
             getSupportFragmentManager().beginTransaction().replace(R.id.container, addFragment).commit();
