@@ -23,14 +23,25 @@ import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    // 0. 뒤로가기 관련 필드
     private long backBtnTime = 0;
 
+    // 1. 로그인 관련 필드
     private TextView tv_nickname;
     private ImageView iv_profile;
 
+    // 2. 리스트 관련 필드
     SingerAdapter adapter;
     EditText editTextDate;
     EditText editTextToDo;
+
+    // 3. 프래그먼트 관련 필드
+    MainFragment mainFragment;
+    MenuFragment menuFragment;
+    AddFragment addFragment;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,31 +106,35 @@ public class MainActivity extends AppCompatActivity {
         };
         Collections.sort(adapter.items, dataAsc);
         adapter.notifyDataSetChanged();
+
+
+
+
+        // 3. 프래그먼트 관련
+        mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.mainFragment);
+        menuFragment = new MenuFragment();
+        addFragment = new AddFragment();
     }
 
+    // 2. 스케쥴 관리
     class SingerAdapter extends BaseAdapter {
         ArrayList<SingerItem> items = new ArrayList<SingerItem>();
-
         // Generate > implement methods
         @Override
         public int getCount() {
             return items.size();
         }
-
         public void addItem(SingerItem item) {
             items.add(item);
         }
-
         @Override
         public Object getItem(int position) {
             return items.get(position);
         }
-
         @Override
         public long getItemId(int position) {
             return position;
         }
-
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -136,12 +151,26 @@ public class MainActivity extends AppCompatActivity {
             view.setDate(item.getDate());
             view.setToDo(item.getToDo());
 
-
             return view;
         }
     }
 
-    // 3. 뒤로 가기 버튼 2번 눌러 종료하기
+    // 3. 프래그먼트
+    public void onFragmentChangedIntoMenu(int index){
+        if(index == 0)
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, menuFragment).commit();
+        else if(index == 1)
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
+    }
+
+    public void onFragmentChangedIntoAdd(int index){
+        if(index == 0)
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, addFragment).commit();
+        else if(index == 1)
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, menuFragment).commit();
+    }
+
+    // 4. 뒤로 가기 버튼 2번 눌러 종료하기
     @Override
     public void onBackPressed() {
         long curTime = System.currentTimeMillis();

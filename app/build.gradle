@@ -40,7 +40,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.2.1' // 파이어베이스 코어
     implementation 'com.google.firebase:firebase-auth:21.0.1' // 파이어베이스 인증
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1' // 파이어베이스 인증2
-    implementation 'com.github.bumptech.glide:glide:4.9.0' // 글라이드 이미지 로딩
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'// 글라이드 이미지 로딩
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0' // 글라이드 이미지 로딩2
 
     testImplementation 'junit:junit:4.+'
