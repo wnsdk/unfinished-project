@@ -1,23 +1,25 @@
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import GlobalStyles from "styles/GlobalStyles";
+import MainLayout from "layouts/MainLayout";
+import MainPage from "pages/MainPage";
+import AccountPage from "pages/AccountPage";
+import NotFoundPage from "pages/NotFountPage";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/account/*" element={<AccountPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
-}
+};
 
 export default App;
