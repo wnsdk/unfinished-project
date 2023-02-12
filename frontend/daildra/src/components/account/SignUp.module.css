@@ -1,0 +1,8 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+/* 회원가입 버튼 */
+.btn_sign_up {
+  cursor: pointer;
+}
