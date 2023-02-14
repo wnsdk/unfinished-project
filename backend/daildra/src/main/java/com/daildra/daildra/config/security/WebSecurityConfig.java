@@ -3,8 +3,8 @@ package com.daildra.daildra.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
@@ -13,81 +13,93 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.XorCsrfTokenRequestAttributeHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class WebSecurityConfig {
 
-//    private final JwtTokenProvider jwtTokenProvider;
-//
-//    @Autowired
-//    public SecurityConfiguration(JwtTokenProvider jwtTokenProvider) {
-//        this.jwtTokenProvider = jwtTokenProvider;
-//    }
+    private final JwtTokenProvider jwtTokenProvider;
 
-    /**
-     * 어떤 URL이 secured 되어야하고, 어떤 URL이 secured 될 필요없는지 정하는 파트
-     * */
+    @Autowired
+    public WebSecurityConfig(JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
+
     @Bean
-    protected SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    protected SecurityFilterChain apiFilterChain(HttpSecurity httpSecurity) throws Exception {
 //        httpSecurity
-//                // UI를 사용하는 것을 기본값으로 가진 시큐리티 설정을 비활성화
-//                .httpBasic().disable()
-//
-//                // REST API에서는 CSRF 보안을 비활성화 (기본적으로 스프링 시큐리티는 CSRF 토큰을 발급해서 요청을 받을 때마다 토큰을 검증함)
-//                .csrf().disable()
-//
-//                // (지금은) 세션은 사용하지 않기 때문에 STATELESS로 설정
-//                .sessionManagement()
-//                .sessionCreationPolicy(
-//                        SessionCreationPolicy.STATELESS
-//                )
-//
-//                .and()
-//                // 들어오는 요청에 대한 사용 권한을 체크
-//                .authorizeRequests()
-//                // 로그인, 회원가입 요청은 모두에게 허용
-//                .requestMatchers(new AntPathRequestMatcher("/account/sign-in", "/account/sign-up")).permitAll()
-//                // '/product'로 시작하는 GET 요청은 모두 허용
-////                .requestMatchers(new AntPathRequestMatcher(HttpMethod.GET, "/product/**")).permitAll()
-//                // 'exception' 단어가 들어간 경로는 모두 허용
-//                .requestMatchers(new AntPathRequestMatcher("**exception**")).permitAll();
-//                // 기타 요청은 인증된 권한을 가진 사용자에게 허용
-////                .antMatchers().hasRole("ADMIN")
-//
-////                .and()
 ////                // 권한을 확인하는 과정에서 통과하지 못하는 예외가 발생할 경우 예외를 전달
 ////                .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
 ////                .and()
 ////                // 인증 과정에서 예외가 발생할 경우 예외를 전달
 ////                .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-////
-////                .and()
-////                // 지금까지 설정한 필터는 JwtAuthenticationFilter를 거친 후에 실행된다.
-////                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
-        httpSecurity
+        httpSecurity.httpBasic().disable()
+                // SPA 방식은 csrf 공격에서 안전한 편인듯? 그러니 disable 시키기
+                .csrf(csrf -> csrf.disable())
+                
+                // 아래 선언한 corsConfigurationSource가 이 시점에서 실행되는 듯?
+                .cors()
+
+                // JWT 토큰으로 인증을 처리하며, 세션은 사용하지 않기 때문에 STATELESS
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                
+                .and()
                 .authorizeHttpRequests((requests) -> requests
                         // 로그인, 회원가입은 인증되지 않은 사람도 요청 가능
-                        .requestMatchers("/account/sign-in", "account/sign-up").permitAll()
+                        .requestMatchers("/account/log-in", "/account/sign-up").permitAll()
                         // 그 밖의 요청들은 인증된 사람만 가능
-                        .anyRequest().authenticated()
-                );
+                        .anyRequest().hasRole("ADMIN")
+                )
+
+                // JwtAuthenticationFilter를 거친 후 id/password 인증 필터 실행
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
-                        .roles("USER")
-                        .build();
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails user =
+//                User.withDefaultPasswordEncoder()
+//                        .username("user")
+//                        .password("password")
+//                        .roles("USER")
+//                        .build();
+//
+//        return new InMemoryUserDetailsManager(user);
+//    }
 
-        return new InMemoryUserDetailsManager(user);
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        
+//        해당 출처에서 오는 요청은 허락한다.
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        
+//        해당 패턴을 가진 출처에서 오는 요청은 허락한다.
+//        configuration.addAllowedOriginPattern("*");
+        
+//        3가지 요청(예비요청 / 단순요청 / 인증된요청) 중, 인증된요청 처리와 관련된 부분
+        configuration.setAllowCredentials(true);
+        
+        configuration.addAllowedHeader("*");
+        
+//        GET, POST, PUT, DELETE 등의 메서드 관련 부분
+        configuration.addAllowedMethod("*");
+        
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 //     WebSecurity는 HttpSecurity 앞단에 적용된다.

@@ -10,7 +10,7 @@ const Header = () => {
           daildra
         </Link>
         <Link
-          to="/account/sign-in"
+          to="/account/log-in"
           className={styles.btn_sign_in}
           style={{ color: SUB_COLOR, border: `1px solid ${SUB_COLOR}` }}
         >

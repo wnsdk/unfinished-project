@@ -1,28 +1,27 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { logIn } from "api/account";
 
-const SignIn = () => {
+const LogIn = () => {
   // 훅 선언부
   const navigate = useNavigate();
 
-  const [memberEmail, setMemberEmail] = useState("");
-  const [memberPassword, setMemberPassword] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userPassword, setUserPassword] = useState("");
 
   // 메서드 선언부
   /** 로그인 버튼 클릭 시 실행 */
-  const doSignIn = () => {
-    const member = {
-      memberEmail: memberEmail,
-      memberPassword: memberPassword,
+  const doLogIn = () => {
+    const user = {
+      userId: userId,
+      userPassword: userPassword,
     };
-    console.log(member);
-    /**
-     *
-     *
-     * 로그인 api 연결 필요
-     *
-     *
-     */
+
+    logIn(
+      user,
+      () => {},
+      () => {}
+    );
     navigate("/");
   };
 
@@ -30,11 +29,11 @@ const SignIn = () => {
     <>
       <div>
         <label>
-          <div>이메일</div>
+          <div>아이디</div>
           <input
             type="text"
             onChange={(e) => {
-              setMemberEmail(e.target.value);
+              setUserId(e.target.value);
             }}
           />
         </label>
@@ -43,14 +42,14 @@ const SignIn = () => {
           <input
             type="password"
             onChange={(e) => {
-              setMemberPassword(e.target.value);
+              setUserPassword(e.target.value);
             }}
           />
         </label>
       </div>
-      <button onClick={doSignIn}>로그인</button>
+      <button onClick={doLogIn}>로그인</button>
     </>
   );
 };
 
-export default SignIn;
+export default LogIn;

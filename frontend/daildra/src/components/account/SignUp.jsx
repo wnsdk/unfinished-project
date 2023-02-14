@@ -6,20 +6,20 @@ const SignUp = () => {
   // 훅 선언부
   const navigate = useNavigate();
 
-  const [memberNickname, setMemberNickname] = useState("");
-  const [memberEmail, setMemberEmail] = useState("");
-  const [memberPassword, setMemberPassword] = useState("");
-  const [memberPasswordCheck, setMemberPasswordCheck] = useState("");
+  const [userNickname, setUserNickname] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userPasswordCheck, setUserPasswordCheck] = useState("");
 
   // 메서드 선언부
   /** 회원가입 버튼 클릭 시 실행 */
   const doSignUp = () => {
-    const member = {
-      memberNickname: memberNickname,
-      memberEmail: memberEmail,
-      memberPassword: memberPassword,
+    const user = {
+      userNickname: userNickname,
+      userEmail: userEmail,
+      userPassword: userPassword,
     };
-    console.log(member);
+    console.log(user);
 
     /**
      *
@@ -40,7 +40,7 @@ const SignUp = () => {
           <input
             type="text"
             onChange={(e) => {
-              setMemberNickname(e.target.value);
+              setUserNickname(e.target.value);
             }}
           />
         </label>
@@ -49,7 +49,7 @@ const SignUp = () => {
           <input
             type="text"
             onChange={(e) => {
-              setMemberEmail(e.target.value);
+              setUserEmail(e.target.value);
             }}
           />
         </label>
@@ -58,7 +58,7 @@ const SignUp = () => {
           <input
             type="password"
             onChange={(e) => {
-              setMemberPassword(e.target.value);
+              setUserPassword(e.target.value);
             }}
           />
         </label>
@@ -67,7 +67,7 @@ const SignUp = () => {
           <input
             type="password"
             onChange={(e) => {
-              setMemberPasswordCheck(e.target.value);
+              setUserPasswordCheck(e.target.value);
             }}
           />
         </label>
