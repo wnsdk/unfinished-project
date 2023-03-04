@@ -18,22 +18,19 @@ public class Init {
     private final Logger LOGGER = LoggerFactory.getLogger(Init.class);
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private static String defaultImg = "https://d1v10kml6l14kq.cloudfront.net/default.jpg";
 
     @PostConstruct
     protected void init() {
-        LOGGER.info("[init] admin 유저생성 시작");
+        LOGGER.info("[init] 테스트 유저 생성 시작");
         User user = User.builder()
-                .userUid("1")
-                .userId("daildra")
-                .userEmail("daildra@gmail.com")
-                .userPassword(passwordEncoder.encode("epdlfwmfk9!"))
+                .userId("test")
+                .userEmail("test@gmail.com")
+                .userPassword(passwordEncoder.encode("test"))
                 .userRoles(Collections.singletonList("ROLE_ADMIN"))
-                .userNickname("데일드라")
-
+                .userNickname("테스트 유저")
                 .build();
-        LOGGER.info("---------------------관리자계정 : {}", user.toString());
+
         userRepository.save(user);
-        LOGGER.info("[init] admin 유저생성 완료 id : {}", user.getUserEmail());
+        LOGGER.info("[init] 테스트 유저생성 완료 id : {}", user.getUserEmail());
     }
 }

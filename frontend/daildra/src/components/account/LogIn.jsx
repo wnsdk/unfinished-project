@@ -19,10 +19,11 @@ const LogIn = () => {
 
     logIn(
       user,
-      () => {},
+      () => {
+        navigate("/");
+      },
       () => {}
     );
-    navigate("/");
   };
 
   return (

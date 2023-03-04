@@ -1,10 +1,5 @@
 package com.daildra.daildra.service.impl;
 
-////import com.daildra.daildra.config.security.JwtTokenProvider;
-//import com.daildra.daildra.data.entity.User;
-//import com.daildra.daildra.data.repository.UserRepository;
-////import com.daildra.daildra.service.UserSignService;
-//import lombok.RequiredArgsConstructor;
 import com.daildra.daildra.config.security.JwtTokenProvider;
 import com.daildra.daildra.data.dto.LogInResultDto;
 import com.daildra.daildra.data.dto.SignUpResultDto;
@@ -13,15 +8,14 @@ import com.daildra.daildra.data.repository.UserRepository;
 import com.daildra.daildra.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
 //
 //import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 @Service
 //@RequiredArgsConstructor
@@ -42,8 +36,41 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public SignUpResultDto signUp(String id, String password, String name, String role) {
-        return null;
+    public SignUpResultDto signUp(String userId, String userPassword, String userNickname, String userEmail, String role) {
+
+        LOGGER.info("[getSignUpResult] 회원가입 정보 전달");
+        User user;
+        if (role.equalsIgnoreCase("admin")) {
+            user = User.builder()
+                    .userId(userId)
+                    .userPassword(passwordEncoder.encode(userPassword))
+                    .userNickname(userNickname)
+                    .userEmail(userEmail)
+                    .userRoles(Collections.singletonList("ROLE_ADMIN"))
+                    .build();
+        }
+        else {
+            user = User.builder()
+                    .userId(userId)
+                    .userPassword(passwordEncoder.encode(userPassword))
+                    .userNickname(userNickname)
+                    .userEmail(userEmail)
+                    .userRoles(Collections.singletonList("ROLE_BASIC"))
+                    .build();
+        }
+
+        User savedUser = userRepository.save(user);
+        SignUpResultDto signUpResultDto = null;
+
+        if (!savedUser.getUserNickname().isEmpty()) {
+            LOGGER.info("[signUp] 정상 처리 완료");
+            signUpResultDto = signUpResultDto.builder().success(true).msg("회원가입 성공").build();
+        } else {
+            LOGGER.info("[signUp] 실패 처리 완료");
+            signUpResultDto = signUpResultDto.builder().success(false).msg("회원가입 실패").build();
+        }
+
+        return signUpResultDto;
     }
 
     @Override

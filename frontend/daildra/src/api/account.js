@@ -22,7 +22,9 @@ const logIn = (user, success, fail) => {
 const logOut = () => {};
 
 /** 회원가입 */
-const signUp = () => {};
+const signUp = (user, success, fail) => {
+  api.post(`/account/sign-up`, user).then(success).catch(fail);
+};
 
 /** 회원탈퇴 */
 const signOut = () => {};

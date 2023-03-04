@@ -1,6 +1,9 @@
 package com.daildra.daildra.controller.account;
 
 import com.daildra.daildra.data.dto.LogInResultDto;
+import com.daildra.daildra.data.dto.SignUpResultDto;
+import com.daildra.daildra.data.dto.UserDto;
+import com.daildra.daildra.data.entity.User;
 import com.daildra.daildra.service.AccountService;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -24,7 +27,7 @@ public class AccountController {
     }
 
     @PostMapping("log-in")
-    public ResponseEntity<LogInResultDto> logIn(@ApiParam(value = "user", required = true) @RequestBody Map<String, String> user) throws RuntimeException{
+    public ResponseEntity<LogInResultDto> logIn(@ApiParam(value = "account", required = true) @RequestBody Map<String, String> user) throws RuntimeException {
         String userId = user.get("userId");
         LOGGER.info("[logIn] 로그인을 시도하고 있습니다. id : {}, pw : ****", userId);
         LogInResultDto logInResultDto = accountService.logIn(userId, user.get("userPassword"));
@@ -36,5 +39,22 @@ public class AccountController {
 
         LOGGER.info("[logIn] 정상적으로 로그인되지 않았습니다. id : {}", userId);
         return new ResponseEntity<LogInResultDto>(logInResultDto, HttpStatus.UNAUTHORIZED);
+    }
+
+    @PostMapping("sign-up")
+    public ResponseEntity<SignUpResultDto> signUp(@ApiParam(value = "account", required = true) @RequestBody Map<String, String> userInfo) throws RuntimeException {
+        UserDto userDto = new UserDto();
+        userDto.setUserId(userInfo.get("userId"));
+        userDto.setUserNickname(userInfo.get("userNickname"));
+        userDto.setUserEmail(userInfo.get("userEmail"));
+        userDto.setUserPassword(userInfo.get("userPassword"));
+        LOGGER.info("[signUp] 회원가입 수행 id : {}, name : {}", userDto.getUserId(), userDto.getUserNickname());
+        SignUpResultDto signUpResDto = accountService.signUp(userDto.getUserId(), userDto.getUserPassword(), userDto.getUserNickname(), userDto.getUserEmail(), "BASIC");
+        if (signUpResDto.isSuccess()) {
+            LOGGER.info("[signUp] 회원가입 완료. id : {}", userDto.getUserId());
+            return new ResponseEntity<SignUpResultDto>(signUpResDto, HttpStatus.CREATED);
+        }
+        LOGGER.info("[signUp] 회원가입 실패. id : {}", userDto.getUserId());
+        return new ResponseEntity<SignUpResultDto>(signUpResDto, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

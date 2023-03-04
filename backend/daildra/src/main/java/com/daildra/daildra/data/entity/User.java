@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,7 +27,8 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
 
     @Id
-    private String userUid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userUid;
 
     @Column(nullable = false, unique = true)
     private String userId;
@@ -36,8 +39,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String userNickname;
 
+    @CreationTimestamp
     @Column(updatable = false)
-    private LocalDate signUpDate;
+    private LocalDateTime signUpDateTime;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)  // JSON 역직렬화 가능, 직렬화 불가능 (비밀번호를 넣을 순 있지만, 조회는 안 됨)
     @Column(nullable = false)
@@ -64,7 +68,7 @@ public class User implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public String getUsername() {
-        return this.userUid;
+        return Long.toString(this.userUid);
     }
 
 //    계정이 만료됐는지 리턴 (true는 만료되지 않았음을 의미)
