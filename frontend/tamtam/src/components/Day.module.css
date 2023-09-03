@@ -1,10 +1,10 @@
 /* 일 */
-.days {
+.dates {
   width: 300px;
 }
 
 /* 일수 */
-.day {
+.date {
   height: 29px;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
@@ -17,7 +17,7 @@
 }
 
 /* 요일*/
-.week {
+.day {
   height: 20px;
   border-bottom: 1px solid black;
   border-right: 1px solid black;
@@ -44,22 +44,44 @@
   border-bottom: 1px solid black;
 }
 
+.minutes > div {
+  cursor: pointer;
+  text-align: center;
+
+  /* 드래그 잔상 없애기 */
+  /* -webkit-user-drag: none; */
+}
+
 .minutes > div > input {
   width: 95%;
-  cursor: pointer;
-
-  /* 배경색 투명하게 */
-  background-color: rgba(0, 0, 0, 0);
 
   /* 인풋 기본 css 제거 */
   outline: none;
   border: none;
 
+  /* 배경색 투명하게 */
+  background-color: rgba(0, 0, 0, 0);
+
   /* 텍스트 정렬 */
   text-align: center;
 }
 
+/* 포커싱되기 전 인풋 태그 */
+.minutes input.notFocused {
+  cursor: pointer;
+  /* background-color: rgb(226, 226, 226); */
+
+  /* 텍스트 드래그 방지(TODO : 더블클릭 시 전체 드래그가 되는 문제가 남아있음) */
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* 클릭된 태그 */
 .clicked {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(240, 240, 240);
+  /* border: 3px green inset !important; */
+  /* box-shadow: 0px 3px 5px 0px rgb(209, 209, 209); */
 }
