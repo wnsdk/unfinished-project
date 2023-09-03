@@ -1,0 +1,65 @@
+/* 일 */
+.days {
+  width: 300px;
+}
+
+/* 일수 */
+.day {
+  height: 29px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+
+  /* 텍스트 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 요일*/
+.week {
+  height: 20px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+
+  /* 텍스트 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 분 */
+.minutes > div {
+  height: 20px;
+  border-bottom: 1px solid rgb(219, 219, 219);
+  border-right: 1px solid black;
+
+  /* 텍스트 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.minutes > div:last-child {
+  border-bottom: 1px solid black;
+}
+
+.minutes > div > input {
+  width: 95%;
+  cursor: pointer;
+
+  /* 배경색 투명하게 */
+  background-color: rgba(0, 0, 0, 0);
+
+  /* 인풋 기본 css 제거 */
+  outline: none;
+  border: none;
+
+  /* 텍스트 정렬 */
+  text-align: center;
+}
+
+/* 클릭된 태그 */
+.clicked {
+  background-color: rgb(235, 235, 235);
+}

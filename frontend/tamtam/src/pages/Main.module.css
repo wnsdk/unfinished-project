@@ -1,0 +1,9 @@
+.table {
+  display: flex;
+  /* 가로 스크롤 */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.table > * {
+  flex: 0 0 auto;
+}

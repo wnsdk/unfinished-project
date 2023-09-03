@@ -1,0 +1,60 @@
+/* 월 */
+.months {
+  height: 50px;
+}
+
+/* 일 */
+.days {
+  width: 200px;
+}
+
+.days {
+}
+
+/* 시 */
+.hours {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.hours > :first-child {
+  width: 80px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+
+  /* 텍스트 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 왼쪽 최상단 */
+.days > :first-child {
+  height: 50px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+
+  /* 텍스트 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 분 */
+.minutes {
+  /* flex 아이템이 공간을 얼마나 차지할지 */
+  flex-grow: 1;
+}
+
+.minutes div {
+  height: 20px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+
+  /* 텍스트 정렬*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
