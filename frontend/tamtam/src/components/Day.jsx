@@ -106,6 +106,7 @@ export default function Day({ date, day, isFocused }) {
     }
     setDisplay(newDisplay);
 
+    // 병합했으니 선택 영역은 하나
     setClickedIndexEnd(start);
   };
 
