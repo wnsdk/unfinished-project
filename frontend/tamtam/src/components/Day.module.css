@@ -6,9 +6,12 @@
 /* 일수 */
 .date {
   height: 29px;
-  border-top: 1px solid black;
+  /* border-top: 1px solid black;
   border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  border-right: 1px solid black; */
+
+  /* 오른쪽 위, 오른쪽 아래 */
+  box-shadow: -1px 1px 0 0 black inset, -1px -1px 0 0 black inset;
 
   /* 텍스트 정렬 */
   display: flex;
@@ -16,7 +19,7 @@
   align-items: center;
 }
 
-/* 요일*/
+/* 요일 */
 .day {
   height: 20px;
   border-bottom: 1px solid black;
@@ -31,8 +34,10 @@
 /* 분 */
 .minutes > div {
   height: 20px;
-  border-bottom: 1px solid rgb(219, 219, 219);
-  border-right: 1px solid black;
+  /* border-bottom: 1px solid rgb(219, 219, 219); */
+  /* border-right: 1px solid black; */
+  /* 아래, 오른쪽 */
+  box-shadow: -1px 0 0 0 black inset, 0 -1px 0 0 rgb(219, 219, 219) inset;
 
   /* 텍스트 정렬 */
   display: flex;
@@ -41,7 +46,9 @@
 }
 
 .minutes > div:last-child {
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  /* 오른쪽 아래 */
+  box-shadow: -1px -1px 0 0 black inset;
 }
 
 .minutes > div {
@@ -81,7 +88,23 @@
 
 /* 클릭된 태그 */
 .clicked {
-  background-color: rgb(240, 240, 240);
-  /* border: 3px green inset !important; */
-  /* box-shadow: 0px 3px 5px 0px rgb(209, 209, 209); */
+  /* background-color: rgb(240, 240, 240); */
+}
+.clickedAlone {
+  box-shadow: 0 0 0 4px green;
+}
+.clickedStart {
+  box-shadow: -4px -4px 0 0 green, 4px -4px 0 0 green, -4px 0 0 0 green,
+    4px 0 0 0 green;
+}
+.clickedBetween {
+  box-shadow: -4px 0 0 0 green, 4px 0 0 0 green;
+}
+.clickedEnd {
+  box-shadow: -4px 4px 0 0 green, 4px 4px 0 0 green, -4px 0 0 0 green,
+    4px 0 0 0 green;
+}
+/* 그림자가 제대로 안 사라지는 경우 방지 */
+.notClicked {
+  box-shadow: none;
 }

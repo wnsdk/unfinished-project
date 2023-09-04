@@ -20,8 +20,10 @@
 
 .hours > :first-child {
   width: 80px;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  /* border-right: 1px solid black; */
+  /* 오른쪽 아래 */
+  box-shadow: -1px -1px 0 0 black inset;
 
   /* 텍스트 정렬 */
   display: flex;
@@ -32,9 +34,12 @@
 /* 왼쪽 최상단 */
 .days > :first-child {
   height: 50px;
-  border-top: 1px solid black;
+  /* border-top: 1px solid black;
   border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  border-right: 1px solid black; */
+
+  /* 오른쪽 위, 오른쪽 아래 */
+  box-shadow: -1px 1px 0 0 black inset, -1px -1px 0 0 black inset;
 
   /* 텍스트 정렬 */
   display: flex;
@@ -50,8 +55,10 @@
 
 .minutes div {
   height: 20px;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  /* border-right: 1px solid black; */
+  /* 오른쪽 아래 */
+  box-shadow: -1px -1px 0 0 black inset;
 
   /* 텍스트 정렬*/
   display: flex;
