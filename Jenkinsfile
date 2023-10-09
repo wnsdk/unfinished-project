@@ -7,7 +7,7 @@ pipeline{
     }
     
     stages{
-        // github에서 repository clone 하기
+        // github에서 repository clone 받기
         stage('Checkout)') {
             steps {
                 git branch: 'main',
@@ -26,26 +26,26 @@ pipeline{
         //     }
         // }
 
-        // stage('Build Docker'){
-        //     steps{
-        //         script{
-        //             sh "docker build -t back-concert:${env.BUILD_NUMBER} cygi-concert/"
-        //             sh "docker tag back-concert:${env.BUILD_NUMBER} wlwlsus/back-concert:${env.BUILD_NUMBER}"
-        //         }
-        //     }
-        // }
+        stage('Build Docker'){
+            steps{
+                script{
+                    sh "docker build -t owners:${env.BUILD_NUMBER} /"
+                    sh "docker tag owners:${env.BUILD_NUMBER} wnsdk/owners:${env.BUILD_NUMBER}"
+                }
+            }
+        }
 
-        // stage('Push Docker to Docker Hub') {
-        //     steps {
-        //         script {
-        //             withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-        //                 sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-        //                 sh "docker push wlwlsus/back-concert:${env.BUILD_NUMBER}"
-        //                 sh "docker image prune -a -f || true"
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Push Docker to Docker Hub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                        sh "docker push wlwlsus/back-concert:${env.BUILD_NUMBER}"
+                        sh "docker image prune -a -f || true"
+                    }
+                }
+            }
+        }
 
         // stage('Update k8s Manifest') {
         //     steps {
