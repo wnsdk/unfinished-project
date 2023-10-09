@@ -12,7 +12,7 @@ pipeline{
         // github에서 repository clone 받기
         stage('Checkout') {
             steps {
-                git branch: 'main-${MODE}',
+                git branch: 'main-user',
                     credentialsId: 'github_cred',
                     url: 'https://github.com/wnsdk/owners.git'
             }
@@ -20,7 +20,7 @@ pipeline{
 
         stage('Gradle Build'){
             steps{
-                echo '${MODE}!!!!!'
+                echo "${MODE}!!!!!"
                 // dir('owners-${MODE}/'){
                 //     sh 'ls'
                 //     sh 'chmod +x ./gradlew'
