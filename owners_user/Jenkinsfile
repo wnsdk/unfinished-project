@@ -28,11 +28,12 @@ pipeline{
         //         }
         //     }
         // }
-        
+
+        // 도커 이미지 생성
         stage('Build Docker'){
             steps{
                 script{
-                    sh "docker build -t owners-${MODE}:${env.BUILD_NUMBER} /"
+                    sh "docker build -t owners-${MODE}:${env.BUILD_NUMBER} owners_${MODE}/"
                     //sh "docker tag owners-${MODE}:${env.BUILD_NUMBER} wnsdk/owners-${MODE}:${env.BUILD_NUMBER}"
                 }
             }
