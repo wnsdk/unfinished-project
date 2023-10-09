@@ -18,10 +18,11 @@ pipeline{
             }
         }
 
+        // 프로덕트 빌드하기
         stage('Gradle Build'){
             steps{
                 echo "mode : ${MODE}"
-                dir("owners-${MODE}/"){
+                dir("owners_${MODE}/"){
                     sh 'ls'
                     sh 'chmod +x ./gradlew'
                     sh './gradlew clean build'
