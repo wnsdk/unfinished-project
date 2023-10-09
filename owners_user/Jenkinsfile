@@ -18,27 +18,25 @@ pipeline{
             }
         }
 
-        stage('Gradle Build'){
-            steps{
-                echo "mode : ${MODE}"
-                dir("owners-${MODE}/"){
-                    sh 'ls'
-                    sh 'chmod +x ./gradlew'
-                    sh './gradlew clean build'
-                }
-            }
-        }
-
-
-        
-        // stage('Build Docker'){
+        // stage('Gradle Build'){
         //     steps{
-        //         script{
-        //             sh "docker build -t owners-board:${env.BUILD_NUMBER} /"
-        //             //sh "docker tag owners-board:${env.BUILD_NUMBER} wnsdk/owners-board:${env.BUILD_NUMBER}"
+        //         echo "mode : ${MODE}"
+        //         dir("owners-${MODE}/"){
+        //             sh 'ls'
+        //             sh 'chmod +x ./gradlew'
+        //             sh './gradlew clean build'
         //         }
         //     }
         // }
+        
+        stage('Build Docker'){
+            steps{
+                script{
+                    sh "docker build -t owners-${MODE}:${env.BUILD_NUMBER} /"
+                    //sh "docker tag owners-${MODE}:${env.BUILD_NUMBER} wnsdk/owners-${MODE}:${env.BUILD_NUMBER}"
+                }
+            }
+        }
 
         // stage('Push Docker to Docker Hub') {
         //     steps {
