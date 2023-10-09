@@ -26,6 +26,8 @@ pipeline{
         //     }
         // }
 
+
+        
         stage('Build Docker'){
             steps{
                 script{
@@ -40,7 +42,7 @@ pipeline{
                 script {
                     withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                        sh "docker push wlwlsus/back-concert:${env.BUILD_NUMBER}"
+                        sh "docker push wnsdk/owners:${env.BUILD_NUMBER}"
                         sh "docker image prune -a -f || true"
                     }
                 }
