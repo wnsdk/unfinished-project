@@ -1,13 +1,74 @@
-pipeline {
+pipeline{
     agent any
-    stages {
-        stage('Checkout') {
+
+    environment {
+        DOCKER_HUB_CREDS = 'docker-hub-credentials'
+        GITHUB_CREDS = 'github-credentials'
+    }
+    
+    stages{
+        // github에서 repository clone 하기
+        stage('Checkout)') {
             steps {
                 git branch: 'main',
                     credentialsId: 'github_cred',
                     url: 'https://github.com/wnsdk/owners.git'
             }
         }
+
+        // stage('Gradle Build'){
+        //     steps{
+        //         dir('cygi-concert/'){
+        //             sh 'ls'
+        //             sh 'chmod +x ./gradlew'
+        //             sh './gradlew clean build'
+        //         }
+        //     }
+        // }
+
+        // stage('Build Docker'){
+        //     steps{
+        //         script{
+        //             sh "docker build -t back-concert:${env.BUILD_NUMBER} cygi-concert/"
+        //             sh "docker tag back-concert:${env.BUILD_NUMBER} wlwlsus/back-concert:${env.BUILD_NUMBER}"
+        //         }
+        //     }
+        // }
+
+        // stage('Push Docker to Docker Hub') {
+        //     steps {
+        //         script {
+        //             withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+        //                 sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+        //                 sh "docker push wlwlsus/back-concert:${env.BUILD_NUMBER}"
+        //                 sh "docker image prune -a -f || true"
+        //             }
+        //         }
+        //     }
+        // }
+
+        // stage('Update k8s Manifest') {
+        //     steps {
+        //         script {
+        //             withCredentials([usernamePassword(credentialsId: "${GITHUB_CREDS}", usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
+        //                 sh "rm -rf allback-helm-chart"
+        //                 sh "git clone https://github.com/wlwlsus/allback-helm-chart.git allback-helm-chart"
+        //                 sh "ls -al"
+        //                 dir('allback-helm-chart/concert') {
+        //                     sh "sed -i 's|repository: .\\+|repository: wlwlsus/back-concert|' values.yaml"
+        //                     sh "sed -i 's|tag: .\\+|tag: ${env.BUILD_NUMBER}|' values.yaml"
+        //                     sh "git config user.email 'cadqe13@gmail.com'"
+        //                     sh "git config user.name 'cadqe13'"
+        //                     sh "git add ."
+        //                     sh "git diff-index --quiet HEAD || git commit -m 'Update back-concert image to ${env.BUILD_NUMBER}'"
+        //                     sh "git remote set-url origin https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/wlwlsus/allback-helm-chart.git"
+        //                     sh "git push origin main"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        
     }
 }
 
@@ -25,16 +86,4 @@ pipeline {
 //              app.push("latest")
 //          }
 //      }
-// }
-
-// stage('Build image') {
-//   app = docker.build("wnsdk/owners")
-// }
-
-// stage('Push image') {
-//   docker.withRegistry('https://registry.hub.docker.com', 'docker-hub')
-//   {
-//     app.push("${env.BUILD_NUMBER}")
-//     app.push("latest")
-//   }
 // }
