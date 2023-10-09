@@ -18,16 +18,16 @@ pipeline{
             }
         }
 
-        // stage('Gradle Build'){
-        //     steps{
-        //         echo "mode : ${MODE}"
-        //         dir("owners-${MODE}/"){
-        //             sh 'ls'
-        //             sh 'chmod +x ./gradlew'
-        //             sh './gradlew clean build'
-        //         }
-        //     }
-        // }
+        stage('Gradle Build'){
+            steps{
+                echo "mode : ${MODE}"
+                dir("owners-${MODE}/"){
+                    sh 'ls'
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew clean build'
+                }
+            }
+        }
 
         // 도커 이미지 생성
         stage('Build Docker'){
