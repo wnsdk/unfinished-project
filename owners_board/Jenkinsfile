@@ -8,31 +8,31 @@ pipeline{
     
     stages{
         // github에서 repository clone 받기
-        stage('Checkout)') {
+        stage('Checkout') {
             steps {
-                git branch: 'main',
+                git branch: 'main-board',
                     credentialsId: 'github_cred',
                     url: 'https://github.com/wnsdk/owners.git'
             }
         }
 
-        // stage('Gradle Build'){
-        //     steps{
-        //         dir('cygi-concert/'){
-        //             sh 'ls'
-        //             sh 'chmod +x ./gradlew'
-        //             sh './gradlew clean build'
-        //         }
-        //     }
-        // }
+        stage('Gradle Build'){
+            steps{
+                dir('owners-board/'){
+                    sh 'ls'
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew clean build'
+                }
+            }
+        }
 
 
         
         stage('Build Docker'){
             steps{
                 script{
-                    sh "docker build -t owners:${env.BUILD_NUMBER} /"
-                    sh "docker tag owners:${env.BUILD_NUMBER} wnsdk/owners:${env.BUILD_NUMBER}"
+                    sh "docker build -t owners-board:${env.BUILD_NUMBER} /"
+                    //sh "docker tag owners-board:${env.BUILD_NUMBER} wnsdk/owners-board:${env.BUILD_NUMBER}"
                 }
             }
         }
