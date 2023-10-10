@@ -40,17 +40,17 @@ pipeline{
             }
         }
 
-        // stage('Push Docker to Docker Hub') {
-        //     steps {
-        //         script {
-        //             withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-        //                 sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-        //                 sh "docker push wnsdk/owners:${env.BUILD_NUMBER}"
-        //                 sh "docker image prune -a -f || true"
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Push Docker to Docker Hub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                        sh "docker push wnsdk/owners:${env.BUILD_NUMBER}"
+                        sh "docker image prune -a -f || true"
+                    }
+                }
+            }
+        }
 
         // stage('Update k8s Manifest') {
         //     steps {
