@@ -4,8 +4,8 @@ pipeline{
 
     environment {
         MODE = 'user'
-        DOCKER_HUB_CREDS = 'docker-hub-credentials'
-        GITHUB_CREDS = 'github-credentials'
+        DOCKER_HUB_CRED = 'docker-hub-credential'
+        GITHUB_CRED = 'github-credential'
     }
     
     stages{
@@ -13,7 +13,7 @@ pipeline{
         stage('Checkout') {
             steps {
                 git branch: "main-${MODE}",
-                    credentialsId: 'github_cred',
+                    credentialsId: "${GITHUB_CRED}",
                     url: 'https://github.com/wnsdk/owners.git'
             }
         }
@@ -43,7 +43,7 @@ pipeline{
         stage('Push Docker to Docker Hub') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CRED}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
                         sh "docker push wnsdk/owners:${env.BUILD_NUMBER}"
                         sh "docker image prune -a -f || true"
