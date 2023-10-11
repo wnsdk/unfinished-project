@@ -61,7 +61,7 @@ pipeline{
                         sh "git clone https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/wnsdk/owners-helm-chart.git owners-helm-chart"
                         sh "ls -al"
                         dir("owners-helm-chart/owners-${MODE}") {
-                            sh "sed -i 's|repository: .\\+|repository: wnsdk/back-concert|' values.yaml"
+                            sh "sed -i 's|repository: .\\+|repository: wnsdk/owners-${MODE}|' values.yaml"
                             sh "sed -i 's|tag: .\\+|tag: ${env.BUILD_NUMBER}|' values.yaml"
                             
                             sh "git config user.email 'jn307742@gmail.com'"
