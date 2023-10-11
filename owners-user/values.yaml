@@ -1,15 +1,16 @@
-replicaCount: 1
-
-image:
-  repository: wnsdk/owners-user
-  tag: 43
-
-service:
-  type: ClusterIP
-  port: 80
-  targetPort: 8000
-
-autoscaling:
-  minReplicas: 1
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 50
+owners-user:
+  replicaCount: 1
+  
+  image:
+    repository: wnsdk/owners-user
+    tag: 43
+  
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 8000
+  
+  autoscaling:
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 50
