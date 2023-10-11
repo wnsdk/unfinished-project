@@ -58,13 +58,15 @@ pipeline{
                 script {
                     withCredentials([usernamePassword(credentialsId: "${GITHUB_CRED}", usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
                         sh "rm -rf owners-helm-chart"
+                        sh "git config user.email 'jn307742@gmail.com'"
+                        sh "git config user.name 'wnsdk'"
                         sh "git clone https://github.com/wnsdk/owners-helm-chart.git owners-helm-chart"
                         sh "ls -al"
                         dir("owners-helm-chart/owners_${MODE}") {
                             sh "sed -i 's|repository: .\\+|repository: wnsdk/back-concert|' values.yaml"
                             sh "sed -i 's|tag: .\\+|tag: ${env.BUILD_NUMBER}|' values.yaml"
-                            sh "git config user.email 'jn307742@gmail.com'"
-                            sh "git config user.name 'wnsdk'"
+                            // sh "git config user.email 'jn307742@gmail.com'"
+                            // sh "git config user.name 'wnsdk'"
                             sh "git add ."
                             sh "git diff-index --quiet HEAD || git commit -m 'Update back-concert image to ${env.BUILD_NUMBER}'"
                             sh "git remote set-url origin https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/wnsdk/owners-helm-chart.git"
