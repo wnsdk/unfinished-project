@@ -8,49 +8,49 @@ pipeline{
     }
     
     stages{
-    //     // github에서 repository clone 받기
-    //     stage('Checkout') {
-    //         steps {
-    //             git branch: "main-${MODE}",
-    //                 credentialsId: "${GITHUB_CRED}",
-    //                 url: 'https://github.com/wnsdk/owners.git'
-    //         }
-    //     }
+        // github에서 repository clone 받기
+        stage('Checkout') {
+            steps {
+                git branch: "main-${MODE}",
+                    credentialsId: "${GITHUB_CRED}",
+                    url: 'https://github.com/wnsdk/owners.git'
+            }
+        }
 
-    //     // 프로덕트 빌드하기
-    //     stage('Gradle Build'){
-    //         steps{
-    //             echo "mode : ${MODE}"
-    //             dir("owners_${MODE}/"){
-    //                 sh 'ls'
-    //                 sh 'chmod +x ./gradlew'
-    //                 sh './gradlew clean build'
-    //             }
-    //         }
-    //     }
+        // 프로덕트 빌드하기
+        stage('Gradle Build'){
+            steps{
+                echo "mode : ${MODE}"
+                dir("owners-${MODE}/"){
+                    sh 'ls'
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew clean build'
+                }
+            }
+        }
 
-    //     // 도커 이미지 생성
-    //     stage('Build Docker'){
-    //         steps{
-    //             script{
-    //                 sh "docker build -t owners-${MODE}:${env.BUILD_NUMBER} owners_${MODE}/"
-    //                 sh "docker tag owners-${MODE}:${env.BUILD_NUMBER} wnsdk/owners-${MODE}:${env.BUILD_NUMBER}"
-    //             }
-    //         }
-    //     }
+        // 도커 이미지 생성
+        stage('Build Docker'){
+            steps{
+                script{
+                    sh "docker build -t owners-${MODE}:${env.BUILD_NUMBER} owners-${MODE}/"
+                    sh "docker tag owners-${MODE}:${env.BUILD_NUMBER} wnsdk/owners-${MODE}:${env.BUILD_NUMBER}"
+                }
+            }
+        }
         
-    //     // 생성한 도커 이미지를 도커 허브에 업데이트
-    //     stage('Push Docker to Docker Hub') {
-    //         steps {
-    //             script {
-    //                 withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CRED}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-    //                     sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-    //                     sh "docker push wnsdk/owners-${MODE}:${env.BUILD_NUMBER}"
-    //                     sh "docker image prune -a -f || true"
-    //                 }
-    //             }
-    //         }
-    //     }
+        // 생성한 도커 이미지를 도커 허브에 업데이트
+        stage('Push Docker to Docker Hub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CRED}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                        sh "docker push wnsdk/owners-${MODE}:${env.BUILD_NUMBER}"
+                        sh "docker image prune -a -f || true"
+                    }
+                }
+            }
+        }
 
         // helm chart 레파지토리로 버저닝 진행
         stage('Update k8s Manifest') {
@@ -60,13 +60,15 @@ pipeline{
                         sh "rm -rf owners-helm-chart"
                         sh "git clone https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/wnsdk/owners-helm-chart.git owners-helm-chart"
                         sh "ls -al"
-                        dir("owners-helm-chart/owners_${MODE}") {
+                        dir("owners-helm-chart/owners-${MODE}") {
                             sh "sed -i 's|repository: .\\+|repository: wnsdk/back-concert|' values.yaml"
                             sh "sed -i 's|tag: .\\+|tag: ${env.BUILD_NUMBER}|' values.yaml"
+                            
                             sh "git config user.email 'jn307742@gmail.com'"
                             sh "git config user.name 'wnsdk'"
                             sh "git add ."
-                            sh "git diff-index --quiet HEAD || git commit -m 'Update back-concert image to ${env.BUILD_NUMBER}'"
+                            sh "git diff-index --quiet HEAD"
+                            sh "git commit -m 'Update owners-${MODE} image to ${env.BUILD_NUMBER}'"
                             sh "git remote set-url origin https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/wnsdk/owners-helm-chart.git"
                             sh "git push origin main"
                         }
