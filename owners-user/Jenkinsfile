@@ -67,7 +67,7 @@ pipeline{
                             sh "git config user.email 'jn307742@gmail.com'"
                             sh "git config user.name 'wnsdk'"
                             sh "git add ."
-                            sh "git diff-index --quiet HEAD"
+                            // sh "git diff-index --quiet HEAD"
                             sh "git commit -m 'Update owners-${MODE} image to ${env.BUILD_NUMBER}'"
                             sh "git remote set-url origin https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/wnsdk/owners-helm-chart.git"
                             sh "git push origin main"
