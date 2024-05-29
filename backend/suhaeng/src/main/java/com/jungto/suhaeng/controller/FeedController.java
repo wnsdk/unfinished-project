@@ -21,7 +21,7 @@ public class FeedController {
     private final FeedService feedService;
 
     @Operation(summary = "피드 조회")
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<FeedResDto>> getFeeds(){
         List<FeedResDto> feedResDtoList = feedService.getFeeds();
         return ResponseEntity.ok(feedResDtoList);

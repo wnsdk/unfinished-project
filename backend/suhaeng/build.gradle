@@ -34,6 +34,9 @@ dependencies {
 	//Swagger
 	//spring boot 3 부터는 springfox 대신 springdoc 사용
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+
+	//Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 }
 
 tasks.named('test') {
