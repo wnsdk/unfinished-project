@@ -1,0 +1,79 @@
+@import '@/App';
+
+.body {
+    display: flex;
+    align-items: flex-start;
+
+    .box1 {
+        width: fit-content;
+        display: flex;
+        align-items: flex-end;
+
+        .user_profile {
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+            margin-right: 4px;
+            object-fit: cover;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12),
+                0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 0px solid transparent;
+            border-top: 9.75px solid #d9d9d9;
+
+            margin-bottom: 18px;
+        }
+    }
+
+    .box2 {
+        .top_metadata {
+            font-size: 16px;
+            color: $sub-text-2;
+
+            .user_name {
+                color: white;
+            }
+            .heart {
+                color: $main-color;
+            }
+        }
+
+        .speech_bubble {
+            background-color: rgb(256, 256, 256, 0.85);
+            padding: 10px 15px;
+            border-radius: 5px;
+            min-width: 200px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12),
+                0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12);
+
+            .content_type {
+                margin-bottom: 5px;
+            }
+
+            .content_1,
+            .content_2 {
+                max-width: 500px;
+
+                @include tablet {
+                    max-width: none;
+                }
+            }
+
+            .content_1 {
+                margin-bottom: 20px;
+            }
+        }
+
+        .bottom_metadata {
+            color: $sub-text-2;
+
+            .edit_box {
+            }
+        }
+    }
+}
