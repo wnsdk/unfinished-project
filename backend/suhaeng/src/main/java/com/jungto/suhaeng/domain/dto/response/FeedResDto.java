@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 public class FeedResDto {
     private Long memberId;
+    private String memberName;
     private Long feedId;
     private String profileUrl;
     private String type;           //피드의 글 종류
