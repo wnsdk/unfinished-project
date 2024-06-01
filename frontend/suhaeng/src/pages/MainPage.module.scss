@@ -9,7 +9,14 @@
     .gradient {
         width: 100%;
         height: 100%;
-        background-image: linear-gradient(to left, rgb(0, 0, 0, 0.2) 0%, rgb(0, 0, 0, 0.8) 50%, rgb(0, 0, 0, 0.8) 100%);
+        // background-image: linear-gradient(
+        //     to right,
+        //     rgb(0, 0, 0, 0.2) 0%,
+        //     rgb(0, 0, 0, 0.8) 50%,
+        //     rgb(0, 0, 0, 0.8) 100%
+        // );
+        // background-image: linear-gradient(to right, rgb(0, 0, 0, 0.8) 0%, rgb(0, 0, 0, 1) 50%, rgb(0, 0, 0, 1) 100%);
+        // background-color: rgb(54, 51, 51);
 
         display: flex;
         justify-content: center;
@@ -19,12 +26,12 @@
             flex-direction: column-reverse;
             width: 100vw;
             height: fit-content;
-            background-image: linear-gradient(
-                to bottom,
-                rgb(0, 0, 0, 0.2) 0%,
-                rgb(0, 0, 0, 0.8) 50%,
-                rgb(0, 0, 0, 0.8) 100%
-            );
+            // background-image: linear-gradient(
+            //     to bottom,
+            //     rgb(0, 0, 0, 0.2) 0%,
+            //     rgb(0, 0, 0, 0.8) 50%,
+            //     rgb(0, 0, 0, 0.8) 100%
+            // );
         }
 
         .box1,
@@ -39,16 +46,48 @@
 
         .box1 {
             width: 50%;
-            .date {
-                font-family: 'LAB_Digital';
-                font-size: 5em;
-            }
+            height: 100vh;
+            background-image: linear-gradient(
+                to top,
+                rgb(0, 0, 0, 0.2) 0%,
+                rgb(0, 0, 0, 0.8) 50%,
+                rgb(0, 0, 0, 0.8) 100%
+            );
+            color: white;
+            font-size: 25px;
         }
         .box2 {
-            width: 40%;
+            width: 50%;
+            height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
             .box2_1 {
-                height: 90%;
+                width: 90%;
+                height: 84%;
                 overflow-y: scroll;
+            }
+            .box2_2 {
+                width: 90%;
+                height: 12%;
+                div {
+                    display: flex;
+                }
+                // > div {
+                //     width: 100%;
+                // }
+                .myProfileImg {
+                    border-radius: 100%;
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                }
+                textarea {
+                    width: 75%;
+                }
             }
             .button {
                 width: 90%;

@@ -1,6 +1,9 @@
 @import '@/App';
 
 .body {
+    padding: 0 5px;
+    margin-bottom: 15px;
+
     display: flex;
     align-items: flex-start;
 
@@ -35,8 +38,11 @@
             font-size: 16px;
             color: $sub-text-2;
 
+            display: flex;
+            justify-content: space-between;
+
             .user_name {
-                color: white;
+                color: black;
             }
             .heart {
                 color: $main-color;
@@ -71,7 +77,8 @@
 
         .bottom_metadata {
             color: $sub-text-2;
-
+            display: flex;
+            justify-content: space-between;
             .edit_box {
             }
         }
