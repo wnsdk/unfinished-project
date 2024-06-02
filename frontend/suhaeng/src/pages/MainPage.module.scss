@@ -1,107 +1,190 @@
-@import '@/App';
+@import "@/App";
+
+.highlight {
+  color: $main-color;
+}
 
 .body {
-    width: 100vw;
-    height: 100vh;
-    // background: url(/images/background.jpg) no-repeat center;
-    background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  //   background: url(/images/background.jpg) no-repeat center;
+  background-size: cover;
 
-    .gradient {
-        width: 100%;
-        height: 100%;
-        // background-image: linear-gradient(
-        //     to right,
-        //     rgb(0, 0, 0, 0.2) 0%,
-        //     rgb(0, 0, 0, 0.8) 50%,
-        //     rgb(0, 0, 0, 0.8) 100%
-        // );
-        // background-image: linear-gradient(to right, rgb(0, 0, 0, 0.8) 0%, rgb(0, 0, 0, 1) 50%, rgb(0, 0, 0, 1) 100%);
-        // background-color: rgb(54, 51, 51);
+  .gradient {
+    width: 100%;
+    height: 100%;
+    // background-image: linear-gradient(
+    //   to right,
+    //   rgb(0, 0, 0, 0.2) 0%,
+    //   rgb(0, 0, 0, 0.8) 50%,
+    //   rgb(0, 0, 0, 0.8) 100%
+    // );
+    // background-image: linear-gradient(to right, rgb(0, 0, 0, 0.8) 0%, rgb(0, 0, 0, 1) 50%, rgb(0, 0, 0, 1) 100%);
+    // background-color: rgb(54, 51, 51);
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include tablet {
+      flex-direction: column-reverse;
+      width: 100vw;
+      height: fit-content;
+      // background-image: linear-gradient(
+      //     to bottom,
+      //     rgb(0, 0, 0, 0.2) 0%,
+      //     rgb(0, 0, 0, 0.8) 50%,
+      //     rgb(0, 0, 0, 0.8) 100%
+      // );
+    }
+
+    .box1,
+    .box2 {
+      height: 90vh;
+
+      @include tablet {
+        width: 90% !important;
+        height: 100vh !important;
+      }
+    }
+
+    .box1 {
+      width: 50%;
+      height: 100vh;
+
+      background: url(/images/background2.jpg) no-repeat center;
+      background-size: cover;
+      //   background-image: linear-gradient(
+      //     to top,
+      //     rgb(0, 0, 0, 0.2) 0%,
+      //     rgb(0, 0, 0, 0.8) 50%,
+      //     rgb(0, 0, 0, 0.8) 100%
+      //   );
+      color: white;
+      font-size: 1.563rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      > div {
+        margin: 5vh 0;
+      }
+
+      .box1_3 {
         display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .title {
+        font-size: 3.125rem;
+      }
+
+      .cnt {
+        font-size: 2rem;
+      }
+
+      .current_users_box {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        // align-items: center;
+        justify-content: center;
+
+        width: 90%;
+        max-width: 800px;
+
+        .current_user {
+          background-color: rgb(171, 171, 171, 0.5);
+          font-size: 0.75rem;
+          padding: 5px 10px;
+          margin: 2.5px;
+          border-radius: 20px;
+        }
+      }
+    }
+
+    .box2 {
+      width: 50%;
+      height: 100vh;
+      //   background-color: rgb(255, 255, 255);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .box2_1 {
+        width: 90%;
+        height: 80%;
+        overflow-y: scroll;
+      }
+      .box2_2 {
+        border-top: 1px solid rgb(206, 206, 206);
+
+        width: 100%;
+        height: 20%;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
 
-        @include tablet {
-            flex-direction: column-reverse;
-            width: 100vw;
-            height: fit-content;
-            // background-image: linear-gradient(
-            //     to bottom,
-            //     rgb(0, 0, 0, 0.2) 0%,
-            //     rgb(0, 0, 0, 0.8) 50%,
-            //     rgb(0, 0, 0, 0.8) 100%
-            // );
+        div {
+          display: flex;
+          flex-direction: row;
         }
-
-        .box1,
-        .box2 {
-            height: 90vh;
-
-            @include tablet {
-                width: 90% !important;
-                height: 100vh !important;
-            }
-        }
-
-        .box1 {
-            width: 50%;
-            height: 100vh;
-            background-image: linear-gradient(
-                to top,
-                rgb(0, 0, 0, 0.2) 0%,
-                rgb(0, 0, 0, 0.8) 50%,
-                rgb(0, 0, 0, 0.8) 100%
-            );
-            color: white;
-            font-size: 25px;
-        }
-        .box2 {
-            width: 50%;
-            height: 100vh;
-
+        .box2_2_2 {
+          height: 75%;
+          .myProfileImg {
+            border-radius: 100%;
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+          }
+          .textbox {
+            border: 1px solid rgb(196, 196, 196);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            align-items: flex-end;
+            padding: 5px;
+            margin-left: 10px;
+            border-radius: 5px;
+            height: 80%;
 
-            .box2_1 {
-                width: 90%;
-                height: 84%;
-                overflow-y: scroll;
+            textarea {
+              width: 500px;
+              height: 100%;
+              border-radius: 5px;
+              border: none;
+              resize: none;
+              font-family: "NanumGothic-Regular" !important;
             }
-            .box2_2 {
-                width: 90%;
-                height: 12%;
-                div {
-                    display: flex;
-                }
-                // > div {
-                //     width: 100%;
-                // }
-                .myProfileImg {
-                    border-radius: 100%;
-                    width: 50px;
-                    height: 50px;
-                    object-fit: cover;
-                }
-                textarea {
-                    width: 75%;
-                }
+
+            textarea:focus {
+              outline: none;
             }
-            .button {
-                width: 90%;
-                height: 8%;
-                border-radius: 10px;
-                color: white;
-                font-size: 24px;
-                font-weight: 900;
-                background-color: $main-color;
+            .submit {
+              font-size: 0.8em;
+              color: rgb(177, 177, 177);
             }
+          }
         }
+      }
+      .loginButton {
+        width: 90%;
+        height: 8%;
+        border-radius: 10px;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 900;
+        background-color: $main-color;
+      }
     }
+  }
 }
 
 *::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
