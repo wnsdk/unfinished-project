@@ -3,6 +3,8 @@ package com.jungto.suhaeng.service;
 import com.jungto.suhaeng.domain.dto.response.FeedResDto;
 import com.jungto.suhaeng.domain.entity.Feed;
 import com.jungto.suhaeng.domain.entity.Member;
+import com.jungto.suhaeng.exception.BaseException;
+import com.jungto.suhaeng.exception.ErrorMessage;
 import com.jungto.suhaeng.repository.FeedRepository;
 import com.jungto.suhaeng.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,9 @@ public class FeedServiceImpl implements FeedService {
     @Override
     public List<FeedResDto> getFeeds() {
         List<Feed> feeds = feedRepository.findAll();
+        if (feeds.size() == 0){
+            return new ArrayList<>();
+        }
 
         List<FeedResDto> feedResDtoList = new ArrayList<>();
         for (int i = 0; i < feeds.size(); i++) {

@@ -23,8 +23,13 @@ public class FeedController {
     @Operation(summary = "피드 조회")
     @GetMapping
     public ResponseEntity<List<FeedResDto>> getFeeds(){
-        List<FeedResDto> feedResDtoList = feedService.getFeeds();
-        return ResponseEntity.ok(feedResDtoList);
+        try {
+            List<FeedResDto> feedResDtoList = feedService.getFeeds();
+            return ResponseEntity.ok(feedResDtoList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.noContent().build(); //TODO : 여기 수정
+        }
     }
 
 }
