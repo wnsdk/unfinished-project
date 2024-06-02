@@ -16,6 +16,7 @@ export default function MainPage() {
         queryKey: ['getFeeds'],
         queryFn: async () => {
             const response = await customAxios.get('feed');
+            // console.log(response.data);
             return response.data;
         },
     });
@@ -41,7 +42,8 @@ export default function MainPage() {
             <div className={styles.gradient}>
                 <div className={styles.box2}>
                     <div className={styles.box2_1}>
-                        {!isLoading && feeds.map((feed, i) => <Component1 key={i} feed={feed} />)}
+                        {!isLoading && feeds.length > 0 && feeds.map((feed, i) => <Component1 key={i} feed={feed} />)}
+                        {!isLoading && feeds.length == 0 && <>없어</>}
                     </div>
 
                     {loginUser.isLogin ? (
