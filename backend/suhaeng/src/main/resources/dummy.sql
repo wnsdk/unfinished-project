@@ -1,11 +1,11 @@
 INSERT INTO member (EMAIL, MEMBER_NAME, PROFILE_URL, ROLE, STATUS)
-VALUES ('jn307742@gmail.com', '최준아', 'https://bit.ly/3VjDuoG', 'ROLE_USER', 'ACTIVE');
-
-INSERT INTO member (EMAIL, MEMBER_NAME, PROFILE_URL, ROLE, STATUS)
 VALUES ('gildong@gmail.com', '홍길동', 'https://bit.ly/3V2xkYB', 'ROLE_ADMIN', 'ACTIVE');
 
 INSERT INTO member (EMAIL, MEMBER_NAME, ROLE, STATUS)
 VALUES ('ayoung@gmail.com', '김아영', 'ROLE_USER', 'ACTIVE');
+
+INSERT INTO member (EMAIL, MEMBER_NAME, PROFILE_URL, ROLE, STATUS)
+VALUES ('ikmyoung@gmail.com', '박익명', 'https://bit.ly/3VjDuoG', 'ROLE_USER', 'ACTIVE');
 
 
 
