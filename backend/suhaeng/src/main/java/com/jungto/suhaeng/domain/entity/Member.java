@@ -1,5 +1,6 @@
 package com.jungto.suhaeng.domain.entity;
 
+import com.jungto.suhaeng.domain.enums.MemberRole;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,8 +25,8 @@ public class Member {
     private String email;
 
     @Column(name = "role", nullable = false)
-//    @Enumerated(EnumType.STRING)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private MemberRole role;
 
     @Column(name = "status", nullable = false)
     private String status;
