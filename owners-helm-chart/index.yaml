@@ -1,0 +1,25 @@
+apiVersion: v1
+entries:
+  owners-board:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-10-11T01:49:23.013019064Z"
+    description: A Helm chart for Kubernetes
+    digest: 627c6177aba710718cb32ac214a8f502f5997fd8827a3715c80b4542274db867
+    name: owners-board
+    type: application
+    urls:
+    - owners-board-0.1.0.tgz
+    version: 0.1.0
+  owners-user:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-10-11T01:49:23.013588652Z"
+    description: A Helm chart for Kubernetes
+    digest: 974b7dba00da5402165d4cdcfc017371657d84961865201c1b393584cd39e420
+    name: owners-user
+    type: application
+    urls:
+    - owners-user-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-10-11T01:49:23.010999024Z"
