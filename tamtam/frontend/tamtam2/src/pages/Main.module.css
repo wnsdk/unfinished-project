@@ -1,0 +1,186 @@
+/* 컨테이너 */
+.container {
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+/* 상단 날짜 로우 */
+.day_future {
+  width: 42px;
+  height: 42px;
+  left: 0px;
+  top: 13px;
+  position: absolute;
+  text-align: center;
+  color: black;
+  font-size: 25px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.week_future {
+  width: 13px;
+  height: 7px;
+  left: 15px;
+  top: 0px;
+  position: absolute;
+  text-align: center;
+  color: #767676;
+  font-size: 12px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.circle_now {
+  width: 42px;
+  height: 42px;
+  left: 0px;
+  top: 13px;
+  position: absolute;
+  background: #3461ff;
+  border-radius: 9999px;
+}
+.day_now {
+  width: 42px;
+  height: 42px;
+  left: 0px;
+  top: 13px;
+  position: absolute;
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.week_now {
+  width: 13px;
+  height: 7px;
+  left: 15px;
+  top: 0px;
+  position: absolute;
+  text-align: center;
+  color: #3461ff;
+  font-size: 12px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.container_days {
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 48px;
+  display: inline-flex;
+}
+.days {
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 158px;
+  display: flex;
+}
+.day {
+  width: 42px;
+  height: 55px;
+  position: relative;
+}
+.week_past {
+  width: 13px;
+  height: 7px;
+  left: 15px;
+  top: 0px;
+  position: absolute;
+  text-align: center;
+  color: #767676;
+  font-size: 12px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.day_past {
+  width: 42px;
+  height: 42px;
+  left: 0px;
+  top: 13px;
+  position: absolute;
+  text-align: center;
+  color: #808080;
+  font-size: 25px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+/* 좌측 시각 컬럼 */
+.container_hours {
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: inline-flex;
+}
+.hours {
+  padding-left: 10px;
+  padding-right: 10px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 36px;
+  display: inline-flex;
+}
+.hour {
+  width: 56px;
+  height: 12px;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+}
+.hour > div {
+  text-align: center;
+  color: black;
+  font-size: 10px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+/* 하루하루 */
+.event_box {
+  width: 160px;
+  height: 303.76px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  background: #8dc2ff;
+  border-radius: 5px;
+}
+.event_text {
+  left: 16px;
+  top: 25.16px;
+  position: absolute;
+  color: black;
+  font-size: 12px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.event {
+  width: 160px;
+  height: 303.76px;
+  left: 22px;
+  top: 169.26px;
+  position: absolute;
+}
+.events {
+  width: 200px;
+  height: 1212px;
+  position: relative;
+  background: white;
+}
+.container_events {
+  background: #eeeeee;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}

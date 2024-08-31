@@ -1,0 +1,14 @@
+.table {
+  display: flex;
+  /* 가로 스크롤 */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.table > * {
+  flex: 0 0 auto;
+}
+
+.menu {
+  /* 세로 스크롤 바 두께 때문에 100vw하면 가로 스크롤바 생김.. */
+  width: 95vw;
+}

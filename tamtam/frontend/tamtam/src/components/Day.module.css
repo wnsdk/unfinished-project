@@ -1,0 +1,110 @@
+/* 일 */
+.dates {
+  width: 300px;
+}
+
+/* 일수 */
+.date {
+  height: 29px;
+  /* border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black; */
+
+  /* 오른쪽 위, 오른쪽 아래 */
+  box-shadow: -1px 1px 0 0 black inset, -1px -1px 0 0 black inset;
+
+  /* 텍스트 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 요일 */
+.day {
+  height: 20px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+
+  /* 텍스트 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 분 */
+.minutes > div {
+  height: 20px;
+  /* border-bottom: 1px solid rgb(219, 219, 219); */
+  /* border-right: 1px solid black; */
+  /* 아래, 오른쪽 */
+  box-shadow: -1px 0 0 0 black inset, 0 -1px 0 0 rgb(219, 219, 219) inset;
+
+  /* 텍스트 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.minutes > div:last-child {
+  /* border-bottom: 1px solid black; */
+  /* 오른쪽 아래 */
+  box-shadow: -1px -1px 0 0 black inset;
+}
+
+.minutes > div {
+  cursor: pointer;
+  text-align: center;
+
+  /* 드래그 잔상 없애기 */
+  /* -webkit-user-drag: none; */
+}
+
+.minutes > div > input {
+  width: 95%;
+
+  /* 인풋 기본 css 제거 */
+  outline: none;
+  border: none;
+
+  /* 배경색 투명하게 */
+  background-color: rgba(0, 0, 0, 0);
+
+  /* 텍스트 정렬 */
+  text-align: center;
+}
+
+/* 포커싱되기 전 인풋 태그 */
+.minutes input.notFocused {
+  cursor: pointer;
+  /* background-color: rgb(226, 226, 226); */
+
+  /* 텍스트 드래그 방지(TODO : 더블클릭 시 전체 드래그가 되는 문제가 남아있음) */
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 클릭된 태그 */
+.clicked {
+  /* background-color: rgb(240, 240, 240); */
+}
+.clickedAlone {
+  box-shadow: 0 0 0 4px green;
+}
+.clickedStart {
+  box-shadow: -4px -4px 0 0 green, 4px -4px 0 0 green, -4px 0 0 0 green,
+    4px 0 0 0 green;
+}
+.clickedBetween {
+  box-shadow: -4px 0 0 0 green, 4px 0 0 0 green;
+}
+.clickedEnd {
+  box-shadow: -4px 4px 0 0 green, 4px 4px 0 0 green, -4px 0 0 0 green,
+    4px 0 0 0 green;
+}
+/* 그림자가 제대로 안 사라지는 경우 방지 */
+.notClicked {
+  box-shadow: none;
+}
