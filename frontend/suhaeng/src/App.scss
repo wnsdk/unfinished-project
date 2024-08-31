@@ -1,0 +1,23 @@
+$mobile-max: 360px;
+$tablet-max: 1023px;
+$desktop-min: 1024px;
+
+$main-color: #f36c33;
+$sub-text-1: #afafaf;
+$sub-text-2: #919191;
+
+@mixin mobile {
+    @media (max-width: $mobile-max) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media (max-width: $tablet-max) and (min-width: $mobile-max) {
+        @content;
+    }
+}
+@mixin desktop {
+    @media (min-width: $desktop-min) {
+        @content;
+    }
+}
