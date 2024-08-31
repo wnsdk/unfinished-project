@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=NanumGothic:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico:wght@400&display=swap");
+body {
+  margin: 0;
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --font-pacifico: Pacifico;
+  --font-ibm-plex-sans-kr: "IBM Plex Sans KR";
+  --font-nanumgothic: NanumGothic;
+
+  /* font sizes */
+  --font-size-xl: 1.25rem;
+  --font-size-13xl: 2rem;
+
+  /* Colors */
+  --color-gray-100: rgba(255, 255, 255, 0.8);
+  --color-gray-200: rgba(255, 255, 255, 0.7);
+  --color-gray-300: rgba(255, 255, 255, 0.4);
+
+  /* Gaps */
+  --gap-xl: 1.25rem;
+  --gap-11xl: 1.88rem;
+  --gap-3xs: 0.63rem;
+
+  /* Paddings */
+  --padding-3xs: 0.63rem;
+  --padding-11xl: 1.88rem;
+  --padding-xl: 1.25rem;
+
+  /* Border radiuses */
+  --br-31xl: 50px;
+}
