@@ -1,3 +1,4 @@
+import { signUp } from "api/account";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SignUp.module.css";
@@ -6,41 +7,49 @@ const SignUp = () => {
   // 훅 선언부
   const navigate = useNavigate();
 
-  const [memberNickname, setMemberNickname] = useState("");
-  const [memberEmail, setMemberEmail] = useState("");
-  const [memberPassword, setMemberPassword] = useState("");
-  const [memberPasswordCheck, setMemberPasswordCheck] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userNickname, setUserNickname] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userPasswordCheck, setUserPasswordCheck] = useState("");
 
   // 메서드 선언부
   /** 회원가입 버튼 클릭 시 실행 */
   const doSignUp = () => {
-    const member = {
-      memberNickname: memberNickname,
-      memberEmail: memberEmail,
-      memberPassword: memberPassword,
+    const user = {
+      userId: userId,
+      userNickname: userNickname,
+      userEmail: userEmail,
+      userPassword: userPassword,
     };
-    console.log(member);
 
-    /**
-     *
-     *
-     * 회원가입 api 연결 필요
-     *
-     *
-     */
-
-    navigate("/");
+    signUp(
+      user,
+      () => {
+        navigate("/");
+      },
+      () => {}
+    );
   };
 
   return (
     <div className={styles.wrapper}>
       <div>
         <label>
+          <div>아이디</div>
+          <input
+            type="text"
+            onChange={(e) => {
+              setUserId(e.target.value);
+            }}
+          />
+        </label>
+        <label>
           <div>닉네임</div>
           <input
             type="text"
             onChange={(e) => {
-              setMemberNickname(e.target.value);
+              setUserNickname(e.target.value);
             }}
           />
         </label>
@@ -49,7 +58,7 @@ const SignUp = () => {
           <input
             type="text"
             onChange={(e) => {
-              setMemberEmail(e.target.value);
+              setUserEmail(e.target.value);
             }}
           />
         </label>
@@ -58,7 +67,7 @@ const SignUp = () => {
           <input
             type="password"
             onChange={(e) => {
-              setMemberPassword(e.target.value);
+              setUserPassword(e.target.value);
             }}
           />
         </label>
@@ -67,7 +76,7 @@ const SignUp = () => {
           <input
             type="password"
             onChange={(e) => {
-              setMemberPasswordCheck(e.target.value);
+              setUserPasswordCheck(e.target.value);
             }}
           />
         </label>
